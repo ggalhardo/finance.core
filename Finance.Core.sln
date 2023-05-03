@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finance.Core.Data.Persisten
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finance.Core.Domain", "Finance.Core.Domain\Finance.Core.Domain.csproj", "{491005B2-800A-461F-8968-75637192910C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finance.Core.IoC", "Finance.Core.IoC\Finance.Core.IoC.csproj", "{75049425-0816-455B-95E6-12A47D40D4DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finance.Core.Infrastructure", "Finance.Core.Infrastructure\Finance.Core.Infrastructure.csproj", "{75049425-0816-455B-95E6-12A47D40D4DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
