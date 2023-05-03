@@ -18,7 +18,7 @@ var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", o
                                               .AddJsonFile($"appsettings.{environment}.json", optional: true)
                                               .Build();
                                               
-Log.Logger = new LoggerConfiguration().WriteTo.Elasticsearch(LogConfiguration.createElasticOptions(configuration)).CreateLogger();
+Log.Logger = new LoggerConfiguration().WriteTo.Elasticsearch(LoggingConfiguration.createElasticOptions(configuration)).CreateLogger();
 
 builder.Host.UseSerilog();
 
