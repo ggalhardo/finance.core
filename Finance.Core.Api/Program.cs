@@ -62,7 +62,7 @@ builder.Services.AddSwaggerConfiguration(AppContext.BaseDirectory);
 var app = builder.Build();
 
 //Adding Apm
-//app.UseAllElasticApm(app.Configuration);
+app.UseAllElasticApm(app.Configuration);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) {
