@@ -37,16 +37,16 @@ namespace Finance.Core.Infrastructure.Persistence.Repository
             return await _context.SaveChanges();
         }
 
-        public virtual async Task<TEntity> GetById(Guid id)
+        public virtual async Task<TEntity> GetOne(FilterDefinition<TEntity> filter)
         {
-            var data = await _dbSet.FindAsync(Builders<TEntity>.Filter.Eq("_id", id));
-            return data.SingleOrDefault();
+            var result = await _dbSet.FindAsync(filter);
+            return result.SingleOrDefault();
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAll()
+        public virtual async Task<IEnumerable<TEntity>> GetAll(FilterDefinition<TEntity> filter)
         {
-            var all = await _dbSet.FindAsync(Builders<TEntity>.Filter.Empty);
-            return all.ToList();
+            var results = await _dbSet.FindAsync(filter);
+            return results.ToList();
         }
 
         public void Dispose()

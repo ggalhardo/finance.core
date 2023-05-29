@@ -10,7 +10,7 @@ namespace Finance.Core.Infrastructure.Persistence.Repository.Abstractions
         Task<bool> Insert(TEntity obj);
         Task<bool> Update(TEntity obj, FilterDefinition<TEntity> filter);
         Task<bool> Remove(FilterDefinition<TEntity> filter);
-        Task<TEntity> GetById(Guid id);
-        Task<IEnumerable<TEntity>> GetAll();
+        Task<TEntity> GetOne(FilterDefinition<TEntity> filter);
+        Task<IEnumerable<TEntity>> GetAll(FilterDefinition<TEntity> filter);
     }
 }
