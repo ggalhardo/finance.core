@@ -9,6 +9,7 @@ using Finance.Core.Infrastructure._Core.Log;
 using Elastic.Apm.NetCoreAll;
 using Finance.Core.Infrastructure._Core.Documentations;
 using Finance.Core.Infrastructure._Core.Database;
+using HealthChecks.MongoDb;
 
 var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
 
@@ -41,6 +42,8 @@ builder.Services.AddSwaggerConfiguration(AppContext.BaseDirectory);
 //Add MongoDB
 builder.Services.AddMongoDBConfiguration(configuration);
 
+//Add MongoDbHealthCheck
+builder.Services.AddHealthChecks().AddCheck<MongoDbHealthCheck>("MongoDB health-check", null, null);
 
 var app = builder.Build();
 
