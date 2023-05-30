@@ -14,9 +14,9 @@ namespace Finance.Core.Infrastructure._Core.Log
         /// <param name="logger">The ILogger</param>
         /// <param name="configuration">The appsettings</param>
         /// <returns>The new Logger configuration</returns>
-        public static void createLoggerElasticSearch(this ILogger logger, IConfigurationRoot configuration) 
+        public static ILogger createLoggerElasticSearch(IConfigurationRoot configuration) 
         {
-            logger = new LoggerConfiguration().WriteTo.Elasticsearch(LoggingConfiguration.createElasticOptions(configuration)).CreateLogger();
+            return new LoggerConfiguration().WriteTo.Elasticsearch(LoggingConfiguration.createElasticOptions(configuration)).CreateLogger();
         }
 
         /// <summary>

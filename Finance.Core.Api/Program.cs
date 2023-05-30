@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Serilog;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -10,6 +9,7 @@ using Elastic.Apm.NetCoreAll;
 using Finance.Core.Infrastructure._Core.Documentations;
 using Finance.Core.Infrastructure._Core.Database;
 using HealthChecks.MongoDb;
+using Finance.Core.Infrastructure._Core.IoC;
 
 var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
 
@@ -20,7 +20,7 @@ var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", o
                                               .AddJsonFile($"appsettings.{environment}.json", optional: true)
                                               .Build();
                                               
-Log.Logger.createLoggerElasticSearch(configuration);
+Log.Logger = LoggingConfiguration.createLoggerElasticSearch(configuration);
 
 builder.Host.UseSerilog();
 
@@ -44,6 +44,9 @@ builder.Services.AddMongoDBConfiguration(configuration);
 
 //Add MongoDbHealthCheck
 builder.Services.AddHealthChecks().AddCheck<MongoDbHealthCheck>("MongoDB health-check", null, null);
+
+//Add services
+builder.Services.RegisterServices();
 
 var app = builder.Build();
 
@@ -69,7 +72,7 @@ app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseEndpoints(endpoints => {
     endpoints.MapControllers();
-    endpoints.MapHealthChecks("health-check").WithMetadata(new AllowAnonymousAttribute());
+    endpoints.MapHealthChecks("health-check");
 });
 
 //Add Static Files
