@@ -1,14 +1,14 @@
 # finance.core
 
-O intuito desse projeto é utilizar algumas conceitos/padrões/tecnologias que estou estudando.
-Mesmo sendo um projeto simples e não necessitando de algumas implementações, procurei utilizar os assuntos estudados para reforçar o aprendizado.
+O intuito desse projeto Ã© utilizar alguns conceitos/padrÃµes/tecnologias que estou estudando.
+Mesmo sendo um projeto simples e nÃ£o necessitando de algumas implementaÃ§Ãµes, procurei utilizar os assuntos estudados para reforÃ§ar o aprendizado.
 
 Seguem alguns itens:
 
  - Observabilidade com Kibana/APM
  - Log com Kibana/ElasticSearch
- - Injeção de dependência/MediatR/CQRS
- - Documentação de API com Swagger
+ - InjeÃ§Ã£o de dependÃªncia/MediatR/CQRS
+ - DocumentaÃ§Ã£o de API com Swagger
  - MongoDB
  - AutoMapper
  - SOLID
