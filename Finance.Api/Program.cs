@@ -10,6 +10,8 @@ using Finance.Core.Logging;
 using Finance.Core.IoC;
 using Finance.Core.Database;
 using Finance.Core.Documentations;
+using Finance.Core.MediatR;
+using Finance.Core.AutoMapper;
 
 var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
 
@@ -36,6 +38,9 @@ builder.Services.AddControllers();
 //Add Healtcheck
 builder.Services.AddHealthChecks();
 
+//Add AutoMapper
+builder.Services.AddAutoMapper(typeof(AutoMapperConfiguration));
+
 //Add Swagger
 builder.Services.AddSwaggerConfiguration(AppContext.BaseDirectory);
 
@@ -47,6 +52,9 @@ builder.Services.AddHealthChecks().AddCheck<MongoDbHealthCheck>("MongoDB health-
 
 //Add services
 builder.Services.RegisterServices();
+
+//Add MediaR
+builder.Services.SetupMediaR();
 
 var app = builder.Build();
 
@@ -76,6 +84,6 @@ app.UseEndpoints(endpoints => {
 });
 
 //Add Static Files
-app.UseStaticFiles();
+//app.UseStaticFiles();
 
 app.Run();

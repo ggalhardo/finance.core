@@ -16,12 +16,12 @@ namespace Finance.Core.Database
         /// <param name="configuration">The IConfigurationRoot (appsettings)</param>
         public static void AddMongoDBConfiguration(this IServiceCollection services, IConfigurationRoot configuration)
         {
-            services.Configure<MongoDBSettings>(configuration.GetSection("MongoDB"));
-            services.AddSingleton<MongoDBSettings>();
+            var mongoDBSettings = configuration.GetSection("MongoDBSettings").Get<MongoDBSettings>();
+            services.AddSingleton(mongoDBSettings);
             services.AddScoped<IDatabaseContext, DatabaseContext>();
 
             //add health-check MongoDB
-            services.AddSingleton(new MongoDbHealthCheck(configuration.GetSection("MongoDB:ConnectionURI").Value, configuration.GetSection("MongoDB:DatabaseName").Value));
+            services.AddSingleton(new MongoDbHealthCheck(mongoDBSettings.ConnectionURI, mongoDBSettings.DatabaseName));
         }
     }
 }

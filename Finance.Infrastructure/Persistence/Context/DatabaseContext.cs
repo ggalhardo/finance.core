@@ -36,13 +36,13 @@ namespace Finance.Infrastructure.Persistence.Context
 
                 using (_session = await _mongoClient.StartSessionAsync())
                 {
-                    _session.StartTransaction();
+                    //_session.StartTransaction();
 
                     var commandTasks = _commands.Select(c => c());
 
                     await Task.WhenAll(commandTasks);
 
-                    await _session.CommitTransactionAsync();
+                    //await _session.CommitTransactionAsync();
                 }
 
                 return true;

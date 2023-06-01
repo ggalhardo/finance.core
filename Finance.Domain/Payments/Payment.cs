@@ -1,4 +1,5 @@
-﻿using Finance.Domain.DomainObjects;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 
 namespace Finance.Domain.Payments
@@ -6,6 +7,7 @@ namespace Finance.Domain.Payments
     public class Payment
     {
         //Properties
+        [BsonGuidRepresentation(GuidRepresentation.Standard)]
         public Guid id { get; private set; }
         public string description { get; private set; }
         public decimal amount { get; private set; }
