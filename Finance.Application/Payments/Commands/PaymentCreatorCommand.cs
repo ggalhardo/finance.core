@@ -1,5 +1,5 @@
 ﻿using Finance.Application.Payments.Validators;
-using Finance.Domain.DomainObjects;
+using Finance.Domain._Core.Response;
 using Finance.Domain.Payments;
 using Finance.Infrastructure.Commands;
 

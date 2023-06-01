@@ -1,6 +1,6 @@
 ﻿using Finance.Application.Payments.Commands;
 using Finance.Application.Payments.Handlers;
-using Finance.Domain.DomainObjects;
+using Finance.Domain._Core.Response;
 using Finance.Infrastructure.Persistence;
 using Finance.Infrastructure.Persistence.Repository;
 using Finance.Infrastructure.Persistence.Repository.Abstractions;

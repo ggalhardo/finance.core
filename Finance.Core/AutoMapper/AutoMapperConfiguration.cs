@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Finance.Domain._Core.Enum;
 using Finance.Domain.Payments;
 
 namespace Finance.Core.AutoMapper
@@ -21,7 +22,7 @@ namespace Finance.Core.AutoMapper
         {
             CreateMap<Payment, PaymentRequest>();
             //Map request to entity with private set's
-            CreateMap<PaymentRequest, Payment>().ConstructUsing(x => new Payment(x.description, x.amount));
+            CreateMap<PaymentRequest, Payment>().ConstructUsing(x => new Payment(x.description, x.amount, (int)((PaymentTypeEnum)System.Enum.Parse(typeof(PaymentTypeEnum), x.paymentType, true))));
         }
     }
 }

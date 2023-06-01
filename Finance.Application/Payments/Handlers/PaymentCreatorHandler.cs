@@ -1,5 +1,5 @@
 ﻿using Finance.Application.Payments.Commands;
-using Finance.Domain.DomainObjects;
+using Finance.Domain._Core.Response;
 using Finance.Infrastructure.Services.Payments.Abstractions;
 using MediatR;
 using System.Threading;

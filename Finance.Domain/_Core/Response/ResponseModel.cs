@@ -1,4 +1,4 @@
-﻿namespace Finance.Domain.DomainObjects
+﻿namespace Finance.Domain._Core.Response
 {
     public class ResponseModel<T>
     {

@@ -1,4 +1,4 @@
-﻿using Finance.Domain.DomainObjects;
+﻿using Finance.Domain._Core.Response;
 using Finance.Domain.Payments;
 using System.Threading.Tasks;
 

@@ -1,5 +1,5 @@
 ﻿using Finance.Application.Payments.Commands;
-using Finance.Domain.DomainObjects;
+using Finance.Domain._Core.Response;
 using Finance.Domain.Payments;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +27,7 @@ namespace Finance.Api.Controllers
             var payment = new PaymentRequest();
             payment.description = "test";
             payment.amount = 1;
+            payment.paymentType = "Credit";
 
             var command = new PaymentCreatorCommand(payment);
             var result = await _paymentCreator.Handle(command, default);

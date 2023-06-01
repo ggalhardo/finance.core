@@ -1,4 +1,4 @@
-﻿using Finance.Domain.DomainObjects;
+﻿using Finance.Domain._Core.Response;
 using FluentValidation.Results;
 using MediatR;
 using System;

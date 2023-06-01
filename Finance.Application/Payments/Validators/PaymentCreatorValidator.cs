@@ -1,5 +1,7 @@
 ﻿using Finance.Application.Payments.Commands;
+using Finance.Domain._Core.Enum;
 using FluentValidation;
+using System;
 
 namespace Finance.Application.Payments.Validators
 {
@@ -14,6 +16,14 @@ namespace Finance.Application.Payments.Validators
             RuleFor(c => c._paymentRequest.amount)
                 .GreaterThan(0)
                 .WithMessage("Invalid amount");
+
+            RuleFor(c => c._paymentRequest.paymentType)
+                .NotEmpty()
+                .WithMessage("Invalid type");
+
+            RuleFor(c => c._paymentRequest.paymentType)
+                .Must(x => Enum.TryParse(x, true, out PaymentTypeEnum paymentTypeEnum))
+                .WithMessage("Type was not found");
         }
     }
 }
