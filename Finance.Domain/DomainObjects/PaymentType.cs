@@ -2,6 +2,11 @@
 {
     public class PaymentType
     {
-        public int id { get; set; }
+        public int Id { get; private set; }
+
+        public PaymentType(int id)
+        {
+            this.Id = id;
+        }
     }
 }

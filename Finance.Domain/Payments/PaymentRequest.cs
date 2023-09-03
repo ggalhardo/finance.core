@@ -5,10 +5,13 @@ namespace Finance.Domain.Payments
     public class PaymentRequest
     {
         //Properties
-        public string description { get; set; }
-        public decimal amount { get; set; }
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
+
+        [JsonPropertyName("amount")]
+        public double Amount { get; set; }
 
         [JsonPropertyName("payment_type")]
-        public string paymentType { get; set; }
+        public string PaymentType { get; set; }
     }
 }

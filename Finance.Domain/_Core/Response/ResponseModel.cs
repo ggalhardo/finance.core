@@ -1,42 +1,59 @@
-﻿namespace Finance.Domain._Core.Response
+﻿using System.Text.Json.Serialization;
+
+namespace Finance.Domain._Core.Response
 {
     public class ResponseModel<T>
     {
-        public T result { get; private set; }
-        public bool error { get; private set; }
-        public string message { get; private set; }
+        [JsonPropertyName("result")]
+        public T Result { get; private set; }
+
+        [JsonPropertyName("error")]
+        public bool Error { get; private set; }
+
+        [JsonPropertyName("message")]
+        public string Message { get; private set; }
 
         public ResponseModel()
         {
-            error = false;
+            this.Error = false;
         }
 
-        public void AddError(bool _error, string _message)
+        public void AddError(bool pError, string pMssage)
         {
-            error = _error;
-            message = _message;
+            this.Error = pError;
+            this.Message = pMssage;
         }
 
-        public void AddResult(T _result)
+        public void AddResult(T pResult)
         {
-            result = _result;
-            error = false;
-            message = string.Empty;
+            this.Result = pResult;
+            this.Error = false;
+            this.Message = string.Empty;
         }
 
-        public string GetErrorMessage()
+        public void AddMessage(string pMessage)
         {
-            return message;
+            this.Message = pMessage;
+        }
+
+        public string GetMessage()
+        {
+            return this.Message;
         }
 
         public bool HasError()
         {
-            return error;
+            return this.Error;
         }
 
         public bool HasResult()
         {
-            return result != null;
+            return this.Result != null;
+        }
+
+        public ResponseModel<T> GetResponse()
+        {
+            return this;
         }
     }
 }

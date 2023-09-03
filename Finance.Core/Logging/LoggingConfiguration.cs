@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using Serilog.Formatting.Json;
 using Serilog.Sinks.Elasticsearch;
 
 namespace Finance.Core.Logging
@@ -14,9 +15,20 @@ namespace Finance.Core.Logging
         /// <param name="logger">The ILogger</param>
         /// <param name="configuration">The appsettings</param>
         /// <returns>The new Logger configuration</returns>
-        public static ILogger createLoggerElasticSearch(IConfigurationRoot configuration)
+        public static ILogger CreateLogger(IConfigurationRoot configuration, string environment)
         {
-            return new LoggerConfiguration().WriteTo.Elasticsearch(createElasticOptions(configuration)).CreateLogger();
+            if (environment.ToLower().StartsWith("dev"))
+            {
+                return new LoggerConfiguration().WriteTo.Console(new JsonFormatter())
+                                            .Enrich.FromLogContext()
+                                            .Enrich.WithEnvironmentName()
+                                            .CreateLogger();
+            }
+
+            return new LoggerConfiguration().WriteTo.Elasticsearch(CreateElasticOptions(configuration))
+                                            .Enrich.FromLogContext()
+                                            .Enrich.WithEnvironmentName()
+                                            .CreateLogger();
         }
 
         /// <summary>
@@ -24,7 +36,7 @@ namespace Finance.Core.Logging
         /// </summary>
         /// <param name="configuration">The appsettings</param>
         /// <returns>The new ElasticsearchSinkOptions</returns>
-        private static ElasticsearchSinkOptions createElasticOptions(IConfigurationRoot configuration)
+        private static ElasticsearchSinkOptions CreateElasticOptions(IConfigurationRoot configuration)
         {
 
             var IndexDefault = configuration.GetSection("AppName").Value;

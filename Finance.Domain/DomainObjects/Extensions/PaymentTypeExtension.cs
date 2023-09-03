@@ -3,13 +3,9 @@
     public static class PaymentTypeExtension
     {
 
-        public static PaymentType Map(this int id)
+        public static PaymentType Map(this int pId)
         {
-            var type = new PaymentType();
-
-            type.id = id;
-
-            return type;
+            return new PaymentType(pId);
         }
 
     }

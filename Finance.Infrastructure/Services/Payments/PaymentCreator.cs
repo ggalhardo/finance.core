@@ -30,6 +30,8 @@ namespace Finance.Infrastructure.Services.Payments
                 response.AddError(true, "An error has occurred to insert the Payment.");
             }
 
+            response.AddMessage(payment.Id.ToString());
+
             return response;
         }
 

@@ -10,26 +10,34 @@ namespace Finance.Domain.Payments
     {
         //Properties
         [BsonGuidRepresentation(GuidRepresentation.Standard)]
-        public Guid id { get; private set; }
-        public string description { get; private set; }
-        public decimal amount { get; private set; }
-        public PaymentType type { get; private set; }
+        public Guid Id { get; private set; }
+        public string Description { get; private set; }
+        public double Amount { get; private set; }
+        public PaymentType Type { get; private set; }
 
         //Constructors
-        public Payment(string _description, decimal _amount, int _type)
+        public Payment(string pDescription, double pAmount, int pType)
         {
-            id = Guid.NewGuid();
-            description = _description;
-            amount = _amount;
-            type = _type.Map();
+            this.Id = Guid.NewGuid();
+            this.Description = pDescription;
+            this.Amount = pAmount;
+            this.Type = pType.Map();
         }
 
-        public Payment(Guid _id, string _description, decimal _amount, int _type)
+        public Payment(Guid pId, string pDescription, double pAmount, int pType)
         {
-            id = _id;
-            description = _description;
-            amount = _amount;
-            type = _type.Map();
+            this.Id = pId;
+            this.Description = pDescription;
+            this.Amount = pAmount;
+            this.Type = pType.Map();
+        }
+
+        public Payment(Guid pId, string pDescription, double pAmount, PaymentType pType)
+        {
+            this.Id = pId;
+            this.Description = pDescription;
+            this.Amount = pAmount;
+            this.Type = pType;
         }
     }
 }

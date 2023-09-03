@@ -9,19 +9,19 @@ namespace Finance.Application.Payments.Validators
     {
         public PaymentCreatorValidator()
         {
-            RuleFor(c => c._paymentRequest.description)
+            RuleFor(c => c.PaymentRequest.Description)
                 .NotEmpty()
                 .WithMessage("Invalid description");
 
-            RuleFor(c => c._paymentRequest.amount)
+            RuleFor(c => c.PaymentRequest.Amount)
                 .GreaterThan(0)
                 .WithMessage("Invalid amount");
 
-            RuleFor(c => c._paymentRequest.paymentType)
+            RuleFor(c => c.PaymentRequest.PaymentType)
                 .NotEmpty()
                 .WithMessage("Invalid type");
 
-            RuleFor(c => c._paymentRequest.paymentType)
+            RuleFor(c => c.PaymentRequest.PaymentType)
                 .Must(x => Enum.TryParse(x, true, out PaymentTypeEnum paymentTypeEnum))
                 .WithMessage("Type was not found");
         }

@@ -7,16 +7,16 @@ namespace Finance.Application.Payments.Commands
 {
     public class PaymentCreatorCommand : CommandBase
     {
-        public PaymentRequest _paymentRequest { get; private set; }
+        public PaymentRequest PaymentRequest { get; private set; }
 
         public PaymentCreatorCommand(PaymentRequest paymentRequest)
         {
-            _paymentRequest = paymentRequest;
+            this.PaymentRequest = paymentRequest;
         }
 
         public override ResponseModel<bool> IsValid()
         {
-            _validationResult = new PaymentCreatorValidator().Validate(this);
+            base.SetValidation(new PaymentCreatorValidator().Validate(this));
             return base.Verify();
         }
     }

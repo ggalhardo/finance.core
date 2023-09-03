@@ -3,7 +3,6 @@ using Finance.Domain._Core.Response;
 using Finance.Domain.Payments;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Finance.Api.Controllers
@@ -21,22 +20,22 @@ namespace Finance.Api.Controllers
 
         [HttpPost]
         [Route("payments/create")]
-        public async Task<IActionResult> create()
+        public async Task<IActionResult> Create()
         {
 
             var payment = new PaymentRequest();
-            payment.description = "test";
-            payment.amount = 1;
-            payment.paymentType = "Credit";
+            payment.Description = "test";
+            payment.Amount = 1.34;
+            payment.PaymentType = "Credit";
 
             var command = new PaymentCreatorCommand(payment);
             var result = await _paymentCreator.Handle(command, default);
             if (result.HasError())
             {
-                return StatusCode(500, result.GetErrorMessage());
+                return StatusCode(500, result.GetResponse());
             }
 
-            return Created("",null);
+            return Created("", result.GetMessage());
         }
     }
 }

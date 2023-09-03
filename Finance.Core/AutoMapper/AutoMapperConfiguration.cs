@@ -22,7 +22,7 @@ namespace Finance.Core.AutoMapper
         {
             CreateMap<Payment, PaymentRequest>();
             //Map request to entity with private set's
-            CreateMap<PaymentRequest, Payment>().ConstructUsing(x => new Payment(x.description, x.amount, (int)((PaymentTypeEnum)System.Enum.Parse(typeof(PaymentTypeEnum), x.paymentType, true))));
+            CreateMap<PaymentRequest, Payment>().ConstructUsing(x => new Payment(x.Description, x.Amount, (int)((PaymentTypeEnum)System.Enum.Parse(typeof(PaymentTypeEnum), x.PaymentType, true))));
         }
     }
 }

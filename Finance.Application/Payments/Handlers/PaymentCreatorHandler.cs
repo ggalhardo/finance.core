@@ -19,14 +19,9 @@ namespace Finance.Application.Payments.Handlers
         public async Task<ResponseModel<bool>> Handle(PaymentCreatorCommand command, CancellationToken cancellationToken)
         {
             var resultValidation = command.IsValid();
-            if (resultValidation.error)
-            {
-                return resultValidation;
-            }
+            if (resultValidation.Error) return resultValidation;
 
-            var resultCreator = await _paymentCreator.Create(command._paymentRequest);
-
-            return resultCreator;
+            return await _paymentCreator.Create(command.PaymentRequest);
         }
     }
 }

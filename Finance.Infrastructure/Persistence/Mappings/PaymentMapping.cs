@@ -1,5 +1,4 @@
-﻿using Finance.Domain.DomainObjects;
-using Finance.Domain.Payments;
+﻿using Finance.Domain.Payments;
 using MongoDB.Bson.Serialization;
 
 namespace Finance.Infrastructure.Persistence.Mappings
@@ -12,9 +11,10 @@ namespace Finance.Infrastructure.Persistence.Mappings
             {
                 map.AutoMap();
                 map.SetIgnoreExtraElements(true);
-                map.MapIdMember(x => x.id);
-                map.MapMember(x => x.description).SetIsRequired(true);
-                map.MapMember(x => x.amount).SetIsRequired(true);
+                map.MapIdMember(x => x.Id);
+                map.MapMember(x => x.Description).SetIsRequired(true);
+                map.MapMember(x => x.Amount).SetIsRequired(true);
+                map.MapMember(x => x.Type).SetIsRequired(true);
             });
         }
     }

@@ -22,7 +22,7 @@ var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", o
                                               .AddJsonFile($"appsettings.{environment}.json", optional: true)
                                               .Build();
                                               
-Log.Logger = LoggingConfiguration.createLoggerElasticSearch(configuration);
+Log.Logger = LoggingConfiguration.CreateLogger(configuration, environment);
 
 builder.Host.UseSerilog();
 
@@ -62,12 +62,12 @@ var app = builder.Build();
 app.UseAllElasticApm(app.Configuration);
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) {
+if (!app.Environment.IsProduction()) {
     app.UseDeveloperExceptionPage();
     app.UseSwaggerSetup();
 }
 
-if (!app.Environment.IsDevelopment()) {
+if (app.Environment.IsProduction()) {
     app.UseHttpsRedirection();
 }
 

@@ -1,12 +1,11 @@
+using Finance.Domain._Core.DatabaseSettings;
+using Finance.Infrastructure.Persistence.Context.Abstractions;
+using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Finance.Domain._Core.DatabaseSettings;
-using Finance.Infrastructure.Persistence.Context.Abstractions;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using MongoDB.Driver;
 
 namespace Finance.Infrastructure.Persistence.Context
 {
@@ -17,13 +16,11 @@ namespace Finance.Infrastructure.Persistence.Context
         public IClientSessionHandle _session { get; set; }
         public MongoClient _mongoClient { get; set; }
         private readonly List<Func<Task>> _commands;
-        private readonly IConfiguration _configuration;
         private readonly MongoDBSettings _mongoDBSettings;
 
-        public DatabaseContext(ILogger<DatabaseContext> logger, IConfiguration configuration, MongoDBSettings mongoDBSettings)
+        public DatabaseContext(ILogger<DatabaseContext> logger, MongoDBSettings mongoDBSettings)
         {
             _logger = logger;
-            _configuration = configuration;
             _mongoDBSettings = mongoDBSettings;
             _commands = new List<Func<Task>>();
         }
