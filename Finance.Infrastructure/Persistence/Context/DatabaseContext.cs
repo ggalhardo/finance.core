@@ -27,26 +27,26 @@ namespace Finance.Infrastructure.Persistence.Context
 
         public async Task<bool> SaveChanges()
         {
+            ConfigureMongo();
+
+            //_session = await _mongoClient.StartSessionAsync();
+
             try
             {
-                ConfigureMongo();
+                //_session.StartTransaction();
 
-                using (_session = await _mongoClient.StartSessionAsync())
-                {
-                    //_session.StartTransaction();
+                var commandTasks = _commands.Select(c => c());
 
-                    var commandTasks = _commands.Select(c => c());
+                await Task.WhenAll(commandTasks);
 
-                    await Task.WhenAll(commandTasks);
-
-                    //await _session.CommitTransactionAsync();
-                }
+                //await _session.CommitTransactionAsync();
 
                 return true;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"An exception as ocurred in SaveChanges. Ex: {ex.Message}");
+                //await _session.AbortTransactionAsync();
                 return false;
             }
         }
