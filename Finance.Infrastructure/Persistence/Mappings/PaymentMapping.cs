@@ -11,7 +11,7 @@ namespace Finance.Infrastructure.Persistence.Mappings
             {
                 map.AutoMap();
                 map.SetIgnoreExtraElements(true);
-                map.MapIdMember(x => x.Id);
+                map.MapIdMember(x => x.Id).SetIgnoreIfDefault(true); ;
                 map.MapMember(x => x.Description).SetIsRequired(true);
                 map.MapMember(x => x.Amount).SetIsRequired(true);
                 map.MapMember(x => x.Type).SetIsRequired(true);

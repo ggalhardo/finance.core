@@ -9,7 +9,7 @@ namespace Finance.Application.Payments.Commands
     {
         public PaymentRequest PaymentRequest { get; private set; }
 
-        public PaymentCreatorCommand(PaymentRequest paymentRequest)
+        public void SetPaymentRequest(PaymentRequest paymentRequest)
         {
             this.PaymentRequest = paymentRequest;
         }

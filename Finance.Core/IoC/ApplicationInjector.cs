@@ -31,9 +31,11 @@ namespace Finance.Core.IoC
 
             //Handlers
             services.AddScoped<IRequestHandler<PaymentCreatorCommand, ResponseModel<bool>>, PaymentCreatorHandler>();
+            services.AddScoped<IRequestHandler<PaymentUpdaterCommand, ResponseModel<bool>>, PaymentUpdaterHandler>();
 
             //Services
             services.AddScoped<IPaymentCreator, PaymentCreator>();
+            services.AddScoped<IPaymentUpdater, PaymentUpdater>();
 
             //Repository
             services.AddScoped<IPaymentRepository, PaymentRepository>();

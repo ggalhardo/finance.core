@@ -26,8 +26,10 @@ namespace Finance.Infrastructure.Services.Payments
         public async Task<ResponseModel<bool>> Create(PaymentRequest request)
         {
             _logger.LogInformation("Executing payment create service");
+
             var response = new ResponseModel<bool>();
             var payment = _mapper.Map<Payment>(request);
+
             var result = await _paymentRepository.Insert(payment);
             if (result == false)
             {

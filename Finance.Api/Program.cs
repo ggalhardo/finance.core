@@ -84,6 +84,6 @@ app.UseEndpoints(endpoints => {
 });
 
 //Add Static Files
-//app.UseStaticFiles();
+app.UseStaticFiles();
 
 app.Run();
