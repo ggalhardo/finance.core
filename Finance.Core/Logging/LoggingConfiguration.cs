@@ -17,17 +17,16 @@ namespace Finance.Core.Logging
         /// <returns>The new Logger configuration</returns>
         public static ILogger CreateLogger(IConfigurationRoot configuration, string environment)
         {
-            if (environment.ToLower().StartsWith("dev"))
+            /*if (environment.ToLower().StartsWith("dev"))
             {
                 return new LoggerConfiguration().WriteTo.Console(new JsonFormatter())
                                             .Enrich.FromLogContext()
                                             .Enrich.WithEnvironmentName()
                                             .CreateLogger();
-            }
+            }*/
 
             return new LoggerConfiguration().WriteTo.Elasticsearch(CreateElasticOptions(configuration))
                                             .Enrich.FromLogContext()
-                                            .Enrich.WithEnvironmentName()
                                             .CreateLogger();
         }
 

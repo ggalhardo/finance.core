@@ -25,22 +25,19 @@ namespace Finance.Infrastructure.Services.Payments
 
         public async Task<ResponseModel<bool>> Create(PaymentRequest request)
         {
+            _logger.LogInformation("Executing payment create service");
             var response = new ResponseModel<bool>();
-
-            using (_logger.BeginScope(request))
+            var payment = _mapper.Map<Payment>(request);
+            var result = await _paymentRepository.Insert(payment);
+            if (result == false)
             {
-                var payment = _mapper.Map<Payment>(request);
-                var result = await _paymentRepository.Insert(payment);
-                if (result == false)
-                {
-                    _logger.LogError("An error has occurred to insert the Payment.");
-                    response.AddError(true, "An error has occurred to insert the Payment.");
-                }
-
-                _logger.LogError($"Payment inserted successfully! PaymentId: {payment.Id}");
-
-                response.AddMessage(payment.Id.ToString());
+                _logger.LogError("An error has occurred to insert the Payment.");
+                response.AddError(true, "An error has occurred to insert the Payment.");
             }
+
+            _logger.LogInformation($"Payment inserted successfully! PaymentId: {payment.Id}");
+
+            response.AddMessage(payment.Id.ToString());
 
             return response;
         }

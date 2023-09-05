@@ -1,5 +1,6 @@
 ﻿using Finance.Application.Payments.Commands;
 using Finance.Application.Payments.Handlers;
+using Finance.Core.Logging;
 using Finance.Domain._Core.Response;
 using Finance.Infrastructure.Persistence;
 using Finance.Infrastructure.Persistence.Repository;
@@ -8,6 +9,7 @@ using Finance.Infrastructure.Services.Payments;
 using Finance.Infrastructure.Services.Payments.Abstractions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Finance.Core.IoC
 {
@@ -20,6 +22,9 @@ namespace Finance.Core.IoC
         /// <param name="services">The IServiceCollection</param>
         public static void RegisterServices(this IServiceCollection services)
         {
+
+            //Logging
+            services.AddScoped<LoggingTracking>(x => new LoggingTracking(Guid.NewGuid()));
 
             //Add Database Map
             DatabasePersistence.Configure();
