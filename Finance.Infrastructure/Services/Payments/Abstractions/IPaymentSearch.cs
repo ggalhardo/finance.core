@@ -1,12 +1,11 @@
 ﻿using Finance.Domain._Core.Response;
 using Finance.Domain.Payments;
-using System;
 using System.Threading.Tasks;
 
 namespace Finance.Infrastructure.Services.Payments.Abstractions
 {
-    public interface IPaymentUpdater
+    public interface IPaymentSearch
     {
-        Task<ResponseModel<string>> Update(string id, PaymentRequest request);
+        Task<ResponseModel<Payment>> SearchOne(string id);
     }
 }

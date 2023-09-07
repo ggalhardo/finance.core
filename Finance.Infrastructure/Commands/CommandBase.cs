@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace Finance.Infrastructure.Commands
 {
-    public class CommandBase : IRequest<ResponseModel<bool>>
+    public class CommandBase : IRequest<ResponseModel<string>>
     {
         public ValidationResult ValidationResult { get; private set; }
 
-        public virtual ResponseModel<bool> IsValid()
+        public virtual ResponseModel<string> IsValid()
         {
             throw new NotImplementedException();
         }
@@ -20,12 +20,12 @@ namespace Finance.Infrastructure.Commands
             this.ValidationResult = validationResult;
         }
 
-        public ResponseModel<bool> Verify()
+        public ResponseModel<string> Verify()
         {
-            var result = new ResponseModel<bool>();
+            var result = new ResponseModel<string>();
             if (!ValidationResult.IsValid)
             {
-                result.AddError(true, string.Join(",", ValidationResult.Errors.Select(x => x.ErrorMessage)));
+                result.AddError(string.Join(",", ValidationResult.Errors.Select(x => x.ErrorMessage)));
             };
 
             return result;

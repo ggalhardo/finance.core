@@ -1,8 +1,7 @@
-﻿using Amazon.Runtime.Internal.Util;
-using AutoMapper;
+﻿using AutoMapper;
 using Finance.Domain._Core.Response;
 using Finance.Domain.Payments;
-using Finance.Infrastructure.Persistence.Repository.Abstractions;
+using Finance.Infrastructure.Persistence.Repository.Payments.Abstractions;
 using Finance.Infrastructure.Services.Payments.Abstractions;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -23,23 +22,24 @@ namespace Finance.Infrastructure.Services.Payments
 
         }
 
-        public async Task<ResponseModel<bool>> Create(PaymentRequest request)
+        public async Task<ResponseModel<string>> Create(PaymentRequest request)
         {
             _logger.LogInformation("Executing payment create service");
 
-            var response = new ResponseModel<bool>();
+            var response = new ResponseModel<string>();
             var payment = _mapper.Map<Payment>(request);
 
             var result = await _paymentRepository.Insert(payment);
             if (result == false)
             {
                 _logger.LogError("An error has occurred to insert the Payment.");
-                response.AddError(true, "An error has occurred to insert the Payment.");
+                response.AddError("An error has occurred to insert the Payment.");
             }
 
             _logger.LogInformation($"Payment inserted successfully! PaymentId: {payment.Id}");
 
-            response.AddMessage(payment.Id.ToString());
+            response.AddResult(payment.Id.ToString());
+            response.AddMessage("Payment inserted successfully!");
 
             return response;
         }

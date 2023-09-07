@@ -18,9 +18,9 @@ namespace Finance.Domain._Core.Response
             this.Error = false;
         }
 
-        public void AddError(bool pError, string pMssage)
+        public void AddError(string pMssage)
         {
-            this.Error = pError;
+            this.Error = true;
             this.Message = pMssage;
         }
 
@@ -28,7 +28,6 @@ namespace Finance.Domain._Core.Response
         {
             this.Result = pResult;
             this.Error = false;
-            this.Message = string.Empty;
         }
 
         public void AddMessage(string pMessage)

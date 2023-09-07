@@ -14,7 +14,7 @@ namespace Finance.Application.Payments.Commands
             this.PaymentRequest = paymentRequest;
         }
 
-        public override ResponseModel<bool> IsValid()
+        public override ResponseModel<string> IsValid()
         {
             base.SetValidation(new PaymentCreatorValidator().Validate(this));
             return base.Verify();

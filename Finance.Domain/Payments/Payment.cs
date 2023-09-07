@@ -7,14 +7,12 @@ namespace Finance.Domain.Payments
 {
     public class Payment
     {
-        //Properties
         [BsonRepresentation(MongoDB.Bson.BsonType.String)]
         public Guid Id { get; private set; }
         public string Description { get; private set; }
         public double Amount { get; private set; }
         public PaymentType Type { get; private set; }
 
-        //Constructors
         public Payment(string pDescription, double pAmount, int pType)
         {
             this.Description = pDescription;

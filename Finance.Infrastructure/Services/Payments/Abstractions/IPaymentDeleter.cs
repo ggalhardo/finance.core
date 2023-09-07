@@ -1,11 +1,10 @@
 ﻿using Finance.Domain._Core.Response;
-using Finance.Domain.Payments;
 using System.Threading.Tasks;
 
 namespace Finance.Infrastructure.Services.Payments.Abstractions
 {
-    public interface IPaymentCreator
+    public interface IPaymentDeleter
     {
-        Task<ResponseModel<string>> Create(PaymentRequest request);
+        Task<ResponseModel<string>> Delete(string id);
     }
 }

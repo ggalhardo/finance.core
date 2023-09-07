@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Finance.Application.Payments.Handlers
 {
-    public class PaymentCreatorHandler : IRequestHandler<PaymentCreatorCommand, ResponseModel<bool>>
+    public class PaymentCreatorHandler : IRequestHandler<PaymentCreatorCommand, ResponseModel<string>>
     {
         private readonly ILogger<PaymentCreatorHandler> _logger;
         private readonly IPaymentCreator _paymentCreator;
@@ -19,7 +19,7 @@ namespace Finance.Application.Payments.Handlers
             _paymentCreator = paymentCreator;
         }
 
-        public async Task<ResponseModel<bool>> Handle(PaymentCreatorCommand command, CancellationToken cancellationToken)
+        public async Task<ResponseModel<string>> Handle(PaymentCreatorCommand command, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Executing PaymentCreatorHandler");
             _logger.LogInformation("Validating PaymentCreatorCommand");

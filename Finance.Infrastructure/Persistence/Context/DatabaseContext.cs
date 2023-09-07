@@ -32,7 +32,7 @@ namespace Finance.Infrastructure.Persistence.Context
         {
             ConfigureMongo();
 
-            //_session = await _mongoClient.StartSessionAsync();
+            _session = await _mongoClient.StartSessionAsync();
 
             try
             {
@@ -43,8 +43,6 @@ namespace Finance.Infrastructure.Persistence.Context
                 await Task.WhenAll(commandTasks);
 
                 //await _session.CommitTransactionAsync();
-
-                return true;
             }
             catch (Exception ex)
             {
@@ -52,6 +50,10 @@ namespace Finance.Infrastructure.Persistence.Context
                 //await _session.AbortTransactionAsync();
                 return false;
             }
+
+            _session.Dispose();
+
+            return true;
         }
 
         private void ConfigureMongo()

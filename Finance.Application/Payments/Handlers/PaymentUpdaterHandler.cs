@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Finance.Application.Payments.Handlers
 {
-    public class PaymentUpdaterHandler : IRequestHandler<PaymentUpdaterCommand, ResponseModel<bool>>
+    public class PaymentUpdaterHandler : IRequestHandler<PaymentUpdaterCommand, ResponseModel<string>>
     {
         private readonly ILogger<PaymentUpdaterHandler> _logger;
         private readonly IPaymentUpdater _paymentUpdater;
@@ -19,7 +19,7 @@ namespace Finance.Application.Payments.Handlers
             _paymentUpdater = paymentUpdater;
         }
 
-        public async Task<ResponseModel<bool>> Handle(PaymentUpdaterCommand command, CancellationToken cancellationToken)
+        public async Task<ResponseModel<string>> Handle(PaymentUpdaterCommand command, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Executing PaymentUpdaterHandler");
             _logger.LogInformation("Validating PaymentUpdaterCommand");

@@ -1,8 +1,9 @@
 ﻿using Finance.Domain.Payments;
 using Finance.Infrastructure.Persistence.Context.Abstractions;
-using Finance.Infrastructure.Persistence.Repository.Abstractions;
+using Finance.Infrastructure.Persistence.Repository.Base;
+using Finance.Infrastructure.Persistence.Repository.Payments.Abstractions;
 
-namespace Finance.Infrastructure.Persistence.Repository
+namespace Finance.Infrastructure.Persistence.Repository.Payments
 {
     public class PaymentRepository : BaseRepository<Payment>, IPaymentRepository
     {

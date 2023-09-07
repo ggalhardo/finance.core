@@ -4,7 +4,6 @@ namespace Finance.Domain.Payments
 {
     public class PaymentRequest
     {
-        //Properties
         [JsonPropertyName("description")]
         public string Description { get; set; }
 
