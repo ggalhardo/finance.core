@@ -114,9 +114,9 @@ namespace Finance.Api.Controllers
                 command.SetPaymentId(id);
                 var result = await _paymentSearchOne.Handle(command, default);
 
-                if (result.HasError()) return StatusCode(500, result.GetResponse());
+                if (result.Result == null) return NotFound(result);
 
-                if (result == null) return NotFound();
+                if (result.HasError()) return StatusCode(500, result.GetResponse());
 
                 return Ok(result);
             }

@@ -26,23 +26,31 @@ namespace Finance.Infrastructure.Services.Payments
 
         public async Task<ResponseModel<string>> Update(string id, PaymentRequest request)
         {
-            _logger.LogInformation("Executing payment update service");
-
             var response = new ResponseModel<string>();
-            var payment = _mapper.Map<Payment>(request);
-            var filter = Builders<Payment>.Filter.Where(x => x.Id == Guid.Parse(id));
 
-            var result = await _paymentRepository.Update(payment, filter);
-            if (result == false)
-            {
-                _logger.LogError("An error has occurred to update the Payment.");
-                response.AddError("An error has occurred to update the Payment.");
+            try { 
+                _logger.LogInformation("Executing payment update service");
+
+                var payment = _mapper.Map<Payment>(request);
+                var filter = Builders<Payment>.Filter.Where(x => x.Id == Guid.Parse(id));
+
+                var result = await _paymentRepository.Update(payment, filter);
+                if (result == false)
+                {
+                    _logger.LogError("An error has occurred to update the Payment.");
+                    response.AddError("An error has occurred to update the Payment.");
+                    return response;
+                }
+
+                _logger.LogInformation($"Payment updated successfully!");
+                response.AddMessage("Payment updated successfully!");
+
+                response.AddResult(payment.Id.ToString());
             }
-
-            _logger.LogInformation($"Payment updated successfully!");
-            response.AddMessage("Payment updated successfully!");
-
-            response.AddResult(payment.Id.ToString());
+            catch (Exception ex) {
+                _logger.LogError($"An error has occurred in payment update. {ex.Message} {ex.StackTrace}");
+                response.AddError("An error has occurred in payment update.");
+            }
 
             return response;
         }

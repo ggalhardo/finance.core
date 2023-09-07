@@ -26,22 +26,32 @@ namespace Finance.Infrastructure.Services.Payments
 
         public async Task<ResponseModel<Payment>> SearchOne(string id)
         {
-            _logger.LogInformation("Executing payment search one service");
-
             var response = new ResponseModel<Payment>();
-            var filter = Builders<Payment>.Filter.Where(x => x.Id == Guid.Parse(id));
 
-            var result = await _paymentRepository.SearchOne(filter);
-            if (result == null)
+            try
             {
-                _logger.LogError("Payment not found.");
-                response.AddError("Payment not found.");
+
+                _logger.LogInformation("Executing payment search one service");
+
+                var filter = Builders<Payment>.Filter.Where(x => x.Id == Guid.Parse(id));
+
+                var result = await _paymentRepository.SearchOne(filter);
+                if (result == null)
+                {
+                    _logger.LogError("Payment not found.");
+                    response.AddError("Payment not found.");
+                    return response;
+                }
+
+                _logger.LogInformation($"Payment found successfully!");
+                response.AddMessage("Payment found successfully!");
+
+                response.AddResult(result);
             }
-
-            _logger.LogInformation($"Payment found successfully!");
-            response.AddMessage("Payment found successfully!");
-
-            response.AddResult(result);
+            catch (Exception ex) {
+                _logger.LogError($"An error has occurred in payment search. {ex.Message} {ex.StackTrace}");
+                response.AddError("An error has occurred in payment search.");
+            }
 
             return response;
         }

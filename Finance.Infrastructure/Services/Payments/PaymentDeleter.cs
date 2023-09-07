@@ -26,20 +26,27 @@ namespace Finance.Infrastructure.Services.Payments
 
         public async Task<ResponseModel<string>> Delete(string id)
         {
-            _logger.LogInformation("Executing payment delete service");
-
             var response = new ResponseModel<string>();
-            var filter = Builders<Payment>.Filter.Where(x => x.Id == Guid.Parse(id));
 
-            var result = await _paymentRepository.Delete(filter);
-            if (result == false)
-            {
-                _logger.LogError("An error has occurred to delete the Payment.");
-                response.AddError("An error has occurred to delete the Payment.");
+            try { 
+                _logger.LogInformation("Executing payment delete service");
+                var filter = Builders<Payment>.Filter.Where(x => x.Id == Guid.Parse(id));
+
+                var result = await _paymentRepository.Delete(filter);
+                if (result == false)
+                {
+                    _logger.LogError("An error has occurred to delete the Payment.");
+                    response.AddError("An error has occurred to delete the Payment.");
+                    return response;
+                }
+
+                _logger.LogInformation($"Payment deleted successfully!");
+                response.AddMessage($"Payment deleted successfully!");
             }
-
-            _logger.LogInformation($"Payment deleted successfully!");
-            response.AddMessage($"Payment deleted successfully!");
+            catch (Exception ex) {
+                _logger.LogError($"An error has occurred in payment delete. {ex.Message} {ex.StackTrace}");
+                response.AddError("An error has occurred in payment delete.");
+            }
 
             return response;
         }
