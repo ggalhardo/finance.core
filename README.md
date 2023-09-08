@@ -13,3 +13,4 @@ Seguem alguns itens:
  - AutoMapper
  - SOLID
  - DDD
+ - Unit tests com XUnit

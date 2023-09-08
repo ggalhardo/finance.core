@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Finance.Domain.Payments
+namespace Finance.Domain.Payments.Request
 {
     public class PaymentRequest
     {

@@ -3,8 +3,9 @@ using Finance.Domain._Core.Response;
 using Finance.Domain.Payments;
 using Finance.Infrastructure.Persistence.Repository.Payments.Abstractions;
 using Finance.Infrastructure.Services.Payments.Abstractions;
+using Finance.Infrastructure.Services.Payments.FilterBuilder;
+using Finance.Infrastructure.Services.Payments.FilterBuilder.Filter;
 using Microsoft.Extensions.Logging;
-using MongoDB.Driver;
 using System;
 using System.Threading.Tasks;
 
@@ -33,7 +34,8 @@ namespace Finance.Infrastructure.Services.Payments
 
                 _logger.LogInformation("Executing payment search one service");
 
-                var filter = Builders<Payment>.Filter.Where(x => x.Id == Guid.Parse(id));
+                var filter = new PaymentFilter().WithId(id)
+                                                .Build();
 
                 var result = await _paymentRepository.SearchOne(filter);
                 if (result == null)

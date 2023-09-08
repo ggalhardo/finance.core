@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Finance.Domain._Core.Response;
 using Finance.Domain.Payments;
+using Finance.Domain.Payments.Request;
 using Finance.Infrastructure.Persistence.Repository.Payments.Abstractions;
 using Finance.Infrastructure.Services.Payments.Abstractions;
 using Microsoft.Extensions.Logging;

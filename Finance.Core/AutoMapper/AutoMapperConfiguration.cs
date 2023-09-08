@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Finance.Domain._Core.Enum;
 using Finance.Domain.Payments;
+using Finance.Domain.Payments.Request;
 
 namespace Finance.Core.AutoMapper
 {

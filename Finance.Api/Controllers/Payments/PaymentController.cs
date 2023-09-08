@@ -3,6 +3,7 @@ using Finance.Application.Payments.Queries;
 using Finance.Core.Logging;
 using Finance.Domain._Core.Response;
 using Finance.Domain.Payments;
+using Finance.Domain.Payments.Request;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

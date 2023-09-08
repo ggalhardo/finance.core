@@ -1,6 +1,6 @@
 ﻿using Finance.Application.Payments.Validators;
 using Finance.Domain._Core.Response;
-using Finance.Domain.Payments;
+using Finance.Domain.Payments.Request;
 using Finance.Infrastructure.Commands;
 
 namespace Finance.Application.Payments.Commands

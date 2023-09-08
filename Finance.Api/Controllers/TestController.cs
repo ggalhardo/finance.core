@@ -3,6 +3,7 @@ using Finance.Application.Payments.Queries;
 using Finance.Core.Logging;
 using Finance.Domain._Core.Response;
 using Finance.Domain.Payments;
+using Finance.Domain.Payments.Request;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -71,7 +72,7 @@ namespace Finance.Api.Controllers
                 var payment = new PaymentRequest();
                 payment.Description = "test2";
                 payment.Amount = 2.98;
-                payment.PaymentType = "Debit";
+                payment.PaymentType = "Debitsdwsd";
 
                 var command = new PaymentUpdaterCommand();
                 command.SetPaymentRequest(payment);
