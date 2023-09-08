@@ -14,3 +14,14 @@ Seguem alguns itens:
  - SOLID
  - DDD
  - Unit tests com XUnit
+ - SonarQube v10.2.0.77647
+	- Requirements
+		jdk-17.0.8.1+1
+	- Tools
+		dotnet tool install --global dotnet-sonarscanner
+		dotnet tool install --global dotnet-coverage
+	- Execution 
+		dotnet sonarscanner begin /k:"finance.core" /d:sonar.host.url="http://localhost:9000"  /d:sonar.token="sqp_2f702accb62ab01500ea54c0fefef3508f5710f3" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+		dotnet build 
+		dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
+		dotnet sonarscanner end /d:sonar.token="sqp_2f702accb62ab01500ea54c0fefef3508f5710f3"

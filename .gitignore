@@ -366,3 +366,6 @@ FodyWeavers.xsd
 
 # Folder to elasticsearch
 esdata/
+
+# Folder to sonarqube
+.sonarqube/
