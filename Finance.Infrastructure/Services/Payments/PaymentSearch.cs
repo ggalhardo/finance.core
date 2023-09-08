@@ -14,13 +14,11 @@ namespace Finance.Infrastructure.Services.Payments
     public class PaymentSearch : IPaymentSearch
     {
         private readonly ILogger<PaymentSearch> _logger;
-        private readonly IMapper _mapper;
         private readonly IPaymentRepository _paymentRepository;
 
-        public PaymentSearch(ILogger<PaymentSearch> logger, IMapper mapper, IPaymentRepository paymentRepository)
+        public PaymentSearch(ILogger<PaymentSearch> logger, IPaymentRepository paymentRepository)
         {
             _logger = logger;
-            _mapper = mapper;
             _paymentRepository = paymentRepository;
 
         }

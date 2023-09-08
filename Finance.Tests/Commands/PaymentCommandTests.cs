@@ -1,11 +1,62 @@
 using Finance.Application.Payments.Commands;
+using Finance.Application.Payments.Validators;
+using Finance.Domain.Payments;
 using Finance.Domain.Payments.Request;
+using Finance.Infrastructure.Commands;
+using System.ComponentModel.DataAnnotations;
 using Xunit;
 
 namespace Finance.Tests.Commands
 {
     public class PaymentQueryTests
     {
+        [Fact]
+        public void IsValid_CommandBase_ReturnFalse()
+        {
+            var command = new CommandBase();
+
+            Assert.Throws<NotImplementedException>(() => command.IsValid());
+        }
+
+        [Fact]
+        public void SetValidation_CommandBase_ReturnFalse()
+        {
+            try
+            {
+                var command = new CommandBase();
+                command.SetValidation(new PaymentUpdaterValidator().Validate(new PaymentUpdaterCommand()));
+                Assert.True(true);
+            }
+            catch
+            {
+                Assert.True(false);
+            }
+        }
+
+        [Fact]
+        public void Verify_CommandBase_ReturnFalse()
+        {
+            try
+            {
+                var request = new PaymentRequest();
+                request.Description = "Test";
+                request.Amount = 1;
+                request.Description = "Credit";
+                var command = new PaymentUpdaterCommand();
+                command.SetPaymentRequest(request);
+                command.SetPaymentId("13231241234");
+
+                var commandBase = new CommandBase();
+                commandBase.SetValidation(new PaymentUpdaterValidator().Validate(command));
+                var result = commandBase.Verify();
+                Assert.True(!result.HasError());
+            }
+            catch
+            {
+                Assert.True(false);
+            }
+        }
+
         [Fact]
         public void IsValid_PaymentCreatorCommand_ReturnFalse()
         {

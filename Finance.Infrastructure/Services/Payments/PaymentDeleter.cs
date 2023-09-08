@@ -13,13 +13,11 @@ namespace Finance.Infrastructure.Services.Payments
     public class PaymentDeleter : IPaymentDeleter
     {
         private readonly ILogger<PaymentDeleter> _logger;
-        private readonly IMapper _mapper;
         private readonly IPaymentRepository _paymentRepository;
 
-        public PaymentDeleter(ILogger<PaymentDeleter> logger, IMapper mapper, IPaymentRepository paymentRepository)
+        public PaymentDeleter(ILogger<PaymentDeleter> logger, IPaymentRepository paymentRepository)
         {
             _logger = logger;
-            _mapper = mapper;
             _paymentRepository = paymentRepository;
 
         }

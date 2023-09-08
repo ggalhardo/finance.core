@@ -1,9 +1,6 @@
 using Finance.Domain._Core.DatabaseSettings;
 using Finance.Infrastructure.Persistence.Context.Abstractions;
 using Microsoft.Extensions.Logging;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Serializers;
-using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -12,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Finance.Infrastructure.Persistence.Context
 {
-    public class DatabaseContext : IDatabaseContext
+    public sealed class DatabaseContext : IDatabaseContext
     {
         private ILogger<DatabaseContext> _logger { get; set; }
         private IMongoDatabase _database { get; set; }

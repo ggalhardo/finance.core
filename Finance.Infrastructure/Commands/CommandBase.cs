@@ -26,7 +26,7 @@ namespace Finance.Infrastructure.Commands
             if (!ValidationResult.IsValid)
             {
                 result.AddError(string.Join(",", ValidationResult.Errors.Select(x => x.ErrorMessage)));
-            };
+            }
 
             return result;
         }
