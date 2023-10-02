@@ -58,7 +58,7 @@ namespace Finance.Api.Controllers
                 {
                     return StatusCode(500, result.GetResponse());
                 }
-                return Created("", result.GetMessage());
+                return Created("", result.GetResponse());
             }
         }
 

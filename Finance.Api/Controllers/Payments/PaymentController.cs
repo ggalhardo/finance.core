@@ -53,7 +53,7 @@ namespace Finance.Api.Payments.Controllers
 
                 if (result.HasError()) return StatusCode(500, result);
 
-                return Created("", result);
+                return Created("", result.GetResponse());
             }
         }
 

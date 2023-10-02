@@ -4,6 +4,7 @@ using Finance.Infrastructure.Persistence.Context.Abstractions;
 using HealthChecks.MongoDb;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Finance.Core.Database
 {
@@ -16,7 +17,7 @@ namespace Finance.Core.Database
         /// <param name="configuration">The IConfigurationRoot (appsettings)</param>
         public static void AddMongoDBConfiguration(this IServiceCollection services, IConfigurationRoot configuration)
         {
-            var mongoDBSettings = configuration.GetSection("MongoDBSettings").Get<MongoDBSettings>();
+            var mongoDBSettings = new MongoDBSettings(Environment.GetEnvironmentVariable("MONGODB_CONNECTION_URI"), Environment.GetEnvironmentVariable("MONGODB_DATABASE_NAME"));
             services.AddSingleton(mongoDBSettings);
             services.AddScoped<IDatabaseContext, DatabaseContext>();
 

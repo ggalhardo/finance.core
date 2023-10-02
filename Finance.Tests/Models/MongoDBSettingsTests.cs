@@ -1,6 +1,4 @@
 using Finance.Domain._Core.DatabaseSettings;
-using Finance.Domain.DomainObjects;
-using Finance.Domain.DomainObjects.Extensions;
 using Xunit;
 
 namespace Finance.Tests.Models
