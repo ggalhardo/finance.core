@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using Serilog.Events;
 using Serilog.Formatting.Json;
 using Serilog.Sinks.Elasticsearch;
 
@@ -27,6 +28,7 @@ namespace Finance.Core.Logging
 
             return new LoggerConfiguration().WriteTo.Elasticsearch(CreateElasticOptions(configuration))
                                             .Enrich.FromLogContext()
+                                            .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
                                             .CreateLogger();
         }
 
@@ -40,7 +42,7 @@ namespace Finance.Core.Logging
 
             var IndexDefault = configuration.GetSection("AppName").Value;
 
-            return new ElasticsearchSinkOptions(new Uri(configuration.GetSection("ElasticConfiguration:Uri").Value))
+            return new ElasticsearchSinkOptions(new Uri(Environment.GetEnvironmentVariable("ELASTIC_CONFIGURATION_URI")))
             {
                 AutoRegisterTemplate = true,
                 IndexFormat = $"{IndexDefault}-{DateTime.UtcNow:yyyy-MM}"

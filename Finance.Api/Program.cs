@@ -12,6 +12,7 @@ using Finance.Core.Database;
 using Finance.Core.Documentations;
 using Finance.Core.MediatR;
 using Finance.Core.AutoMapper;
+using Finance.Core.Logging.Middleware;
 
 var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
 
@@ -77,6 +78,9 @@ app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 //Adding compression request
 //app.UseResponseCompression();
+
+//Add Global Error Middleware
+app.UseMiddleware<LoggingMiddleware>();
 
 app.UseEndpoints(endpoints => {
     endpoints.MapControllers();

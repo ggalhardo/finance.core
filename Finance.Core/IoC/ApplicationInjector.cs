@@ -25,9 +25,6 @@ namespace Finance.Core.IoC
         public static void RegisterServices(this IServiceCollection services)
         {
 
-            //LoggingTracking
-            services.AddScoped<LoggingTracking>(x => new LoggingTracking(Guid.NewGuid()));
-
             //Add Database Map
             DatabasePersistence.Configure();
 

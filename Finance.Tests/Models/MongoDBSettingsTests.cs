@@ -9,16 +9,14 @@ namespace Finance.Tests.Models
         [Fact]
         public void ConnectionURI_MongoDBSettings()
         {
-            var MongoDBSettings = new MongoDBSettings();
-            MongoDBSettings.ConnectionURI = "Test";
+            var MongoDBSettings = new MongoDBSettings("Test", "Test");
             Assert.Equal("Test", MongoDBSettings.ConnectionURI);
         }
 
         [Fact]
         public void DatabaseName_MongoDBSettings()
         {
-            var MongoDBSettings = new MongoDBSettings();
-            MongoDBSettings.DatabaseName = "Test";
+            var MongoDBSettings = new MongoDBSettings("Test", "Test");
             Assert.Equal("Test", MongoDBSettings.DatabaseName);
         }
 
